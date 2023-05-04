@@ -1,0 +1,7 @@
+pydub
+click
+noise
+numpy
+opencv-python 
+opencv-python-headless
+webcolors
