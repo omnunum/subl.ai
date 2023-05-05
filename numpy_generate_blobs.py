@@ -75,7 +75,7 @@ def rescaled_noise(x, y, scale):
 @click.option("--height", default=480, type=int, help="Video height")
 @click.option("--fps", default=60, type=int, help="Frames per second")
 @click.option("--duration", default=10, type=int, help="Video duration in seconds")
-@click.option("--noise_size_scale", default=0.0016, type=float, help="Scaling factor to determine the size (freqency) of the noise")
+@click.option("--noise_size_scale", default=0.0022, type=float, help="Scaling factor to determine the size (freqency) of the noise")
 @click.option("--noise_time_scale", default=0.1, type=float, help="Scaling factor to determine how quickly we move through the noise space")
 @click.option("--colors", default="#E3D2B5:2,#F2B950:5,#D99748:3,#D99AB7:5,#D98989:2", type=str, help="JSON list of CSS3 color names and weights")
 @click.option("--scale-factor", default=1, type=int, help="Factor to scale the output by")
@@ -94,8 +94,9 @@ def main(width: int, height: int, fps: int, duration: int, noise_size_scale: flo
         small_frame = np.zeros((height // scale_factor, width // scale_factor, 3), dtype=np.uint8)
 
         # Calculate noisey_t_x and noisey_t_y for circular traversal
-        angle = (2 * np.pi * t * noise_time_scale) / max_frames
-        tx, ty = width * np.sin(angle), height * np.cos(angle)
+        angle = np.pi * (t / max_frames)
+        tx = (width * np.sin(angle) * noise_time_scale)
+        ty = (height * np.cos(angle) * noise_time_scale)
         noisey_t_x = tx + vectorized_noise(tx, tx, noise_size_scale)
         noisey_t_y = ty + vectorized_noise(ty*2, ty*2, noise_size_scale)
 
