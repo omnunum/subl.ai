@@ -3,7 +3,6 @@ import logging
 import click
 from pydub import AudioSegment, silence
 from noise import pnoise1
-import numpy as np
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -33,6 +32,7 @@ def extend_silence(input_file: str, output_file: str, extend_silence_ms: int, mi
 
     # Export the modified audio
     extended_audio.export(output_file, format="wav")
+
 
 if __name__ == '__main__':
     extend_silence()

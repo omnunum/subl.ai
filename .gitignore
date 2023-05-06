@@ -1,0 +1,4 @@
+.env
+scripts/**/raw
+scripts/**/processed
+.DS_Store
