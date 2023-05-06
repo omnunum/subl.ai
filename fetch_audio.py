@@ -65,8 +65,6 @@ def save_audio_files(api_key: str, voice_id: str, script_dir: str, processed_cla
                 file.write(audio)
             print(f"Saved audio file: {file_path}")
 
-@click.command()
-@click.option('--voice_name', default='Sleepy Sister', help='Voice name to use for generating audio.')
 def fetch(voice_name: str):
     scripts_dir = "scripts"
     all_directories = list_directories(scripts_dir)
@@ -79,13 +77,19 @@ def fetch(voice_name: str):
         print(processed_clauses)
 
     api_key = os.getenv("ELEVEN_API_KEY")
-    voice_name = "Sleepy Sister"
+    if not api_key:
+        raise Exception("ELEVEN_API_KEY environment variable not set")
     voice_id = get_voice_id(api_key, voice_name)
     print(f"Voice ID for {voice_name}: {voice_id}")
 
     for file_path in found_files:
         script_dir = os.path.dirname(file_path)
         save_audio_files(api_key, voice_id, script_dir, processed_clauses)
+
+@click.command(name='fetch')
+@click.option('--voice_name', default='Sleepy Sister', help='Voice name to use for generating audio.')
+def fetch_command(voice_name: str):
+    fetch(voice_name)
 
 if __name__ == "__main__":
     fetch()

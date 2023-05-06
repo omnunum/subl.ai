@@ -1,4 +1,5 @@
 .env
 scripts/**/raw
-scripts/**/processed
+scripts/**/respaced
 .DS_Store
+.vscode

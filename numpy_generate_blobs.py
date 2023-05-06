@@ -3,9 +3,10 @@ from typing import Tuple
 import click
 import numpy as np
 import cv2
-import noise
 import webcolors
 from scipy.interpolate import RectBivariateSpline
+
+from utils import rescaled_noise
 
 Color = list[int, int, int]
 WeightedColor = list[Color, float]
@@ -65,10 +66,6 @@ def noise_to_color_array(noise: np.ndarray, color_array: np.ndarray, cumulative_
     result = (color_array[idx] * (1 - t) + color_array[np.mod(idx + 1, num_colors)] * t).astype(np.uint8)
     
     return result
-
-def rescaled_noise(x, y, scale):
-    noise_value = noise.snoise2(x * scale, y * scale)
-    return (noise_value + 1) / 2
 
 @click.command()
 @click.option("--width", default=640, type=int, help="Video width")
