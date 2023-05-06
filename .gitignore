@@ -1,5 +1,5 @@
 .env
-scripts/**/raw
-scripts/**/respaced
+audio/**
 .DS_Store
 .vscode
+*.pyc

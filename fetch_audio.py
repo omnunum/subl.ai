@@ -5,21 +5,19 @@ from typing import List, Tuple, Optional
 
 import click
 
-from utils import list_directories, find_files_in_directories
+from common import list_directories, find_files_in_directory, Script
 
-def process_clauses(file_path: str) -> List[Tuple[str, List[str]]]:
-    with open(file_path, 'r') as file:
-        data = json.load(file)
+ProcessedClauses = List[Tuple[str, List[str]]]
 
+def process_clauses(script: Script) -> ProcessedClauses:
     result = []
-    for item in data:
-        name = item['name']
+    for section in script:
+        name = section['name']
         formatted_clauses = []
-        for clause in item['clauses']:
+        for clause in section['clauses']:
             formatted_clause = "\n".join([line + "..." for line in clause])
             formatted_clauses.append(formatted_clause)
         result.append((name, formatted_clauses))
-
     return result
 
 def get_voice_id(api_key: str, voice_name: str) -> str:
@@ -52,11 +50,11 @@ def get_audio(api_key: str, voice_id: str, text: str) -> bytes:
 
     return response.content
 
-def save_audio_files(api_key: str, voice_id: str, script_dir: str, processed_clauses: List[Tuple[str, List[str]]]):
+def generate_audio_files(api_key: str, voice_id: str, write_dir: str, processed_clauses: ProcessedClauses):
     for section_index, (section_name, clauses) in enumerate(processed_clauses):
         for clause_index, clause in enumerate(clauses):
             file_name = f"{section_index}_{section_name}_{clause_index}.wav"
-            file_path = os.path.join(script_dir, "raw", file_name)
+            file_path = os.path.join(write_dir, file_name)
             if os.path.exists(file_path):
                 print(f"Skipped existing audio file: {file_path}")
                 continue
@@ -65,26 +63,17 @@ def save_audio_files(api_key: str, voice_id: str, script_dir: str, processed_cla
                 file.write(audio)
             print(f"Saved audio file: {file_path}")
 
-def fetch(voice_name: str):
-    scripts_dir = "scripts"
-    all_directories = list_directories(scripts_dir)
-    target_file = "script.json"
-    found_files = find_files_in_directories(all_directories, target_file)
-
-    for file_path in found_files:
-        print(f"Processing {os.path.basename(file_path)} at: {file_path}")
-        processed_clauses = process_clauses(file_path)
-        print(processed_clauses)
+def fetch(voice_name: str, script: Script, write_dir: str):
+    processed_clauses = process_clauses(script)
+    print(processed_clauses)
 
     api_key = os.getenv("ELEVEN_API_KEY")
     if not api_key:
         raise Exception("ELEVEN_API_KEY environment variable not set")
     voice_id = get_voice_id(api_key, voice_name)
     print(f"Voice ID for {voice_name}: {voice_id}")
-
-    for file_path in found_files:
-        script_dir = os.path.dirname(file_path)
-        save_audio_files(api_key, voice_id, script_dir, processed_clauses)
+    
+    generate_audio_files(api_key, voice_id, write_dir, processed_clauses)
 
 @click.command(name='fetch')
 @click.option('--voice_name', default='Sleepy Sister', help='Voice name to use for generating audio.')
