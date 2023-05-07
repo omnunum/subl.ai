@@ -2,7 +2,9 @@ pydub
 click
 noise
 numpy
+aeneas==1.7.0
 opencv-python 
 opencv-python-headless
 webcolors
 scipy
+pedalboard
