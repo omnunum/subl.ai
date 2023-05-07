@@ -5,15 +5,16 @@ from functools import partial
 
 from pydub import AudioSegment
 
-from common import list_directories, find_files_in_directory
+from common import find_files_in_directory
 from fetch_audio import fetch
 from process_audio import process_segments, align_transcript
 
 
 def main():
     for script_file in find_files_in_directory("scripts", "\.json"):
+        name = os.path.basename(script_file).split(".")[0]
         dir = partial(os.path.join)
-        audio_dir = partial(dir, "audio")
+        audio_dir = partial(dir, "audio", name)
         raw_dir = audio_dir("raw")
         with open(script_file, "r") as script_file:
             script = json.load(script_file)
@@ -21,6 +22,7 @@ def main():
         # initialize directories
         retimed_dir = audio_dir("retimed")
         os.makedirs(retimed_dir, exist_ok=True)
+        output = AudioSegment.empty()
         for section_ix, section in enumerate(script):
             for clause_ix, clause in enumerate(section['clauses']):
                 name = f"{section_ix}_{section['name']}_{clause_ix}.wav"
@@ -29,8 +31,17 @@ def main():
                 alignment = align_transcript(input_file, clause)
                 # retime silence to consistent >1s, normalize gain, and slow down 15%
                 audio = AudioSegment.from_file(input_file)
-                output = process_segments(audio, alignment, 1000, 250, 100, 3)
-                output.export(retimed_file, format="wav")
-
+                processed_segment = process_segments(
+                    audio, 
+                    alignment, 
+                    extend_silence_ms=500, 
+                    min_silence_ms=250, 
+                    noise_scale=100, 
+                    target_speech_rate=3.5,
+                    shift_fragment_windows=50
+                )
+                processed_segment.export(retimed_file, format="wav")
+                output += processed_segment
+        output.export(audio_dir("output.wav"), format="wav")
 if __name__ == "__main__":
     main()
