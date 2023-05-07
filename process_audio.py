@@ -1,51 +1,99 @@
+import io
 import logging
+import subprocess
+import os
+import tempfile
 
-import click
+from aeneas.executetask import ExecuteTask
+from aeneas.task import Task
+from aeneas.syncmap.fragment import SyncMapFragment
 from pydub import AudioSegment, silence
 
-from utils import rescaled_noise
+
+from common import rescaled_noise, Clause
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-def pad_silence(input_file: str, output_file: str, extend_silence_ms: int, min_silence_ms: int, noise_scale: int):
+def align_transcript(audio_filepath: str, transcript: Clause):
+    """Align a transcript to an audio file.
+    
+    :param audio_filepath: The path to the audio file.
+    :param transcript: The transcript to align.
+    
+    :return: The alignment.
+    """
+    with tempfile.NamedTemporaryFile(mode="w") as transcript_file:
+        transcript_file.write("\n".join(transcript))
+        transcript_file.flush()
+        # create Task object
+        config_string = u"task_language=eng|is_text_type=plain|os_task_file_format=json"
+        task = Task(config_string=config_string)
+        task.audio_file_path_absolute = os.path.abspath(audio_filepath)
+        task.text_file_path_absolute = os.path.abspath(transcript_file.name)
+        ExecuteTask(task).execute()
+
+        return task.sync_map_leaves()
+
+def process_segments(input: AudioSegment, alignment: list[SyncMapFragment], extend_silence_ms: int, min_silence_ms: int, noise_scale: int, target_speech_rate: float) -> AudioSegment:
     """Pad sections of silence in an audio file to be a certain length with additional
     length +/- the length as determined by the noise function.
     
-    :param input_file: The input audio file.
-    :param output_file: The output audio file.
+    :param input: The input audio.
+    :param transcript: Determines what rate to slow each segment (helps keep even speaking pace).
     :param extend_silence_ms: The desired silence extension length in milliseconds.
     :param min_silence_len: The threshold for detected silence length in milliseconds.
-    :param noise_scale: The noise scale that determines the range of silence extension."""
-    # Load the audio file (MP3 support added)
-    audio = AudioSegment.from_file(input_file)
-
-    # Detect silence
-    silence_thresh = -50
-    silent_segments = silence.split_on_silence(audio, min_silence_ms, silence_thresh, keep_silence=True)
-
+    :param noise_scale: The noise scale that determines the range of silence extension.
+    
+    :return: The output audio.
+    """
+    
     # Extend silence
     extended_audio = AudioSegment.empty()
+    for idx, fragment in enumerate(alignment):
+        if fragment.is_head_or_tail:
+            continue
+        segment = input[float(fragment.begin) * 1000:float(fragment.end) * 1000]
 
-    for idx, segment in enumerate(silent_segments):
+        # used to debug individual segments
+        # os.makedirs("audio/fragments", exist_ok=True)
+        # segment.export(f"audio/fragments/{idx}_raw.wav", format="wav")
+
         noise_value = 1 + (rescaled_noise(idx, 1, noise_scale) - 0.5)
-        nonsilent = silence.detect_nonsilent(segment, min_silence_ms, silence_thresh)[0]
-        silence_len = len(segment) - (nonsilent[1] - nonsilent[0])
+        nonsilent = silence.detect_nonsilent(segment, min_silence_ms, -50)[0]
+        nonsilent_len = nonsilent[1] - nonsilent[0]
+        silence_len = len(segment) - nonsilent_len
         random_silence_duration = max(0, (extend_silence_ms - silence_len) * noise_value)
-        logger.debug(f"silent segment {idx}: using noise value of {noise_value} to add {random_silence_duration}ms to original {silence_len}ms of silence")
-        extended_audio += segment + AudioSegment.silent(duration=random_silence_duration)
+        logger.debug(
+            f"segment {idx}: using noise value of {noise_value:.4f}"
+            f"to add {random_silence_duration}ms to original {silence_len}ms of silence"
+        )
+        # Normalize gain by removing headroom
+        segment = segment.apply_gain(-20 - segment.dBFS)
 
-    # Export the modified audio
-    extended_audio.export(output_file, format="wav")
+        # Export the 'segment' AudioSegment to a bytes object
+        segment_data = segment.export(format="wav")
 
-@click.command(name='pad_silence')
-@click.option('--input_file', default='input.mp3', help='Input audio file name (e.g., input.mp3).')
-@click.option('--output_file', default='output.wav', help='Output audio file name (e.g., output.wav).')
-@click.option('--extend_silence_ms', default=1000, help='Desired silence extension length in milliseconds.')
-@click.option('--min_silence_ms', default=250, help='Detected silence length in milliseconds.')
-@click.option('--noise_scale', default=100, help='Perlin noise scale factor.')
-def pad_silence_command(input_file, output_file, extend_silence_ms, min_silence_ms, noise_scale):
-    pad_silence(input_file, output_file, extend_silence_ms, min_silence_ms, noise_scale)
-
-if __name__ == '__main__':
-    pad_silence()
+        word_count = len(fragment.text.split())
+        speech_rate = word_count / (nonsilent_len / 1000)
+        retime_pct = int(((target_speech_rate - speech_rate) / speech_rate) * 100)
+        logger.debug(
+            f"segment {idx}: speech rate {speech_rate:.2f} words per second,"
+            f"retiming by {retime_pct}%"
+        )
+        # Run SoundStretch with stdin and stdout
+        soundstretch_process = subprocess.Popen(
+            ["SoundStretch", "stdin", "stdout", f"-tempo={retime_pct}", "-speech"],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL
+        )
+        processed_data, _ = soundstretch_process.communicate(input=segment_data.read())
+        
+        # Convert the processed data back to an AudioSegment
+        processed_segment = AudioSegment.from_file(io.BytesIO(processed_data))
+        # processed_segment.export(f"audio/fragments/{idx}_processed.wav", format="wav")
+        
+        extended_audio += processed_segment + AudioSegment.silent(duration=random_silence_duration)
+        
+    return extended_audio
