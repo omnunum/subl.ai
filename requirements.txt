@@ -3,6 +3,8 @@ click
 noise
 numpy
 aeneas==1.7.0
+spacy
+pyphen
 opencv-python 
 opencv-python-headless
 webcolors
