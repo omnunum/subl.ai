@@ -12,3 +12,4 @@ scipy
 pedalboard
 dataclasses-json
 jinja2
+edgedb
