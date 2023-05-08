@@ -1,19 +1,10 @@
 import os
 import re
+from pathlib import Path
 
 from typing import Optional
-from dataclasses import dataclass
-
 import noise
 
-Clause = list[str]
-
-@dataclass
-class ScriptSection:
-    name: str
-    clauses: list[Clause]
-
-Script = list[ScriptSection]
 
 def list_directories(path: str) -> list[str]:
     dirs = []
@@ -29,7 +20,7 @@ def find_files_in_directory(directory: str, regex: Optional[str]=None) -> list[s
         for file in files:
             if regex and not re.search(regex, os.path.basename(file)):
                 continue
-            found_files.append(os.path.join(root, file))
+            found_files.append(Path(root, file))
     return found_files
 
 def rescaled_noise(x, y, scale):

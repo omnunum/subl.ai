@@ -1,20 +1,20 @@
-import json
 import os
 import requests
-from typing import List, Tuple, Optional
+from typing import List, Tuple
 
-import click
+from pathlib import Path
 
-from common import list_directories, find_files_in_directory, Script
+from classes import Script
+
 
 ProcessedClauses = List[Tuple[str, List[str]]]
 
 def process_clauses(script: Script) -> ProcessedClauses:
     result = []
-    for section in script:
-        name = section['name']
+    for section in script.sections:
+        name = section.name
         formatted_clauses = []
-        for clause in section['clauses']:
+        for clause in section.clauses:
             formatted_clause = "\n".join([line + "..." for line in clause])
             formatted_clauses.append(formatted_clause)
         result.append((name, formatted_clauses))
@@ -50,11 +50,11 @@ def get_audio(api_key: str, voice_id: str, text: str) -> bytes:
 
     return response.content
 
-def generate_audio_files(api_key: str, voice_id: str, write_dir: str, processed_clauses: ProcessedClauses):
+def generate_audio_files(api_key: str, voice_id: str, write_dir: Path, processed_clauses: ProcessedClauses):
     for section_index, (section_name, clauses) in enumerate(processed_clauses):
         for clause_index, clause in enumerate(clauses):
             file_name = f"{section_index}_{section_name}_{clause_index}.wav"
-            file_path = os.path.join(write_dir, file_name)
+            file_path = write_dir / file_name
             if os.path.exists(file_path):
                 print(f"Skipped existing audio file: {file_path}")
                 continue
@@ -63,7 +63,7 @@ def generate_audio_files(api_key: str, voice_id: str, write_dir: str, processed_
                 file.write(audio)
             print(f"Saved audio file: {file_path}")
 
-def fetch(voice_name: str, script: Script, write_dir: str):
+def fetch(voice_name: str, script: Script, write_dir: Path):
     processed_clauses = process_clauses(script)
     print(processed_clauses)
 
@@ -74,11 +74,3 @@ def fetch(voice_name: str, script: Script, write_dir: str):
     print(f"Voice ID for {voice_name}: {voice_id}")
     
     generate_audio_files(api_key, voice_id, write_dir, processed_clauses)
-
-@click.command(name='fetch')
-@click.option('--voice_name', default='Sleepy Sister', help='Voice name to use for generating audio.')
-def fetch_command(voice_name: str):
-    fetch(voice_name)
-
-if __name__ == "__main__":
-    fetch()

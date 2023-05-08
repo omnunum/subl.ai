@@ -1,218 +1,221 @@
-[{
-	"name": "introduction",
-	"clauses": [
-		[
-			"welcome to your best life",
-			"my name is Soothing Sister",
-			"and in a few moments",
-			"I'm going to take you on a journey",
-			"far away from your baby daddy and his drama",
-			"and all the trouble he puts you through",
-			"if it feels like pulling teeth",
-			"just to get him to do the bare minimum",
-			"then follow along for the next few minutes",
-			"and together we will meditate away his bullshit"
-		],
-		[
-			"first lets take a moment to find ourselves",
-			"and place our body firmly in the space we find ourselves",
-			"find someplace comfortable",
-			"to sit or lay down",
-			"whatever helps you relax and focus your mind"
-		],
-		[
-			"close your eyes",
-			"and join me in a quick check to make sure we're all here"
+{
+	"name": "demo",
+	"sections": [{
+		"name": "introduction",
+		"clauses": [
+			[
+				"welcome to your best life",
+				"my name is Soothing Sister",
+				"and in a few moments",
+				"I'm going to take you on a journey",
+				"far away from your baby daddy and his drama",
+				"and all the trouble he puts you through",
+				"if it feels like pulling teeth",
+				"just to get him to do the bare minimum",
+				"then follow along for the next few minutes",
+				"and together we will meditate away his bullshit"
+			],
+			[
+				"first lets take a moment to find ourselves",
+				"and place our body firmly in the space we find ourselves",
+				"find someplace comfortable",
+				"to sit or lay down",
+				"whatever helps you relax and focus your mind"
+			],
+			[
+				"close your eyes",
+				"and join me in a quick check to make sure we're all here"
+			]
 		]
-	]
-}, {
-	"name": "body_scan",
-	"clauses": [
-		[
-			"direct your attention to the top of your head",
-			"feel your head resting upon your neck",
-			"travel your focus down to your shoulders",
-			"and your chest",
-			"now to your left hand",
-			"and your right hand",
-			"flowing down to your hips",
-			"extending to your left foot",
-			"and now your right foot",
-			"now that we're all here",
-			"we're ready to deal with your baby daddy"
+	}, {
+		"name": "body_scan",
+		"clauses": [
+			[
+				"direct your attention to the top of your head",
+				"feel your head resting upon your neck",
+				"travel your focus down to your shoulders",
+				"and your chest",
+				"now to your left hand",
+				"and your right hand",
+				"flowing down to your hips",
+				"extending to your left foot",
+				"and now your right foot",
+				"now that we're all here",
+				"we're ready to deal with your baby daddy"
+			]
 		]
-	]
-}, {
-	"name": "visualize_room",
-	"clauses": [
-		[
-			"Imagine yourself in a room",
-			"in front of you are floor to ceiling windows",
-			"you look out to see the ocean",
-			"its calm today",
-			"the waves are taking their time to reach the shore",
-			"the sun begins to set over the horizon",
-			"its a deep orange color, what a lovely sight",
-			"in the corners are some lush plants",
-			"they look so perky and healthy",
-			"they make the room feel alive and full of possibility"
-		],
-		[
-			"you turn to your right to see three doors",
-			"you're not quite sure where they lead",
-			"but you know that nothing can enter this space unless you want it to",
-			"this room is where we keep all of our positive thoughts",
-			"there might be something we don't like on the other side of these doors",
-			"that's ok though, because we know it cant reach us in our room",
-			"as long as we're in this room, nothing can make us feel bad",
-			"now that we feel confident in our space, lets see what's behind those doors"
+	}, {
+		"name": "visualize_room",
+		"clauses": [
+			[
+				"Imagine yourself in a room",
+				"in front of you are floor to ceiling windows",
+				"you look out to see the ocean",
+				"its calm today",
+				"the waves are taking their time to reach the shore",
+				"the sun begins to set over the horizon",
+				"its a deep orange color, what a lovely sight",
+				"in the corners are some lush plants",
+				"they look so perky and healthy",
+				"they make the room feel alive and full of possibility"
+			],
+			[
+				"you turn to your right to see three doors",
+				"you're not quite sure where they lead",
+				"but you know that nothing can enter this space unless you want it to",
+				"this room is where we keep all of our positive thoughts",
+				"there might be something we don't like on the other side of these doors",
+				"that's ok though, because we know it cant reach us in our room",
+				"as long as we're in this room, nothing can make us feel bad",
+				"now that we feel confident in our space, lets see what's behind those doors"
+			]
 		]
-	]
-}, {
-	"name": "door_one",
-	"clauses": [
-		[
-			"bring your focus back to the door",
-			"reach your hand out and turn the knob",
-			"give the door a light push and let it swing open on its own",
-			"oh look, it's your baby daddy on the other side",
-			"it seems like he's upset about something",
-			"he's moving his mouth but no sound is coming out",
-			"he seems to be aware that he can't speak",
-			"it's cute that he keeps trying"
-		],
-		[
-			"you realize that you're in total control here",
-			"this is your room and he can't make any sound",
-			"you tell him that unless he can calm down he won't be able to talk",
-			"this makes him more mad",
-			"his face is starting to get red",
-			"isn't it adorable that he thinks this will get him what he wants",
-			"in this room, you're the only one that gets what they want",
-			"you decide you want him to start being a good boy and calm down"
-		],
-		[
-			"you snap your fingers",
-			"and just like that",
-			"he stops his tantrum",
-			"he's sitting down now",
-			"looking confused but obedient",
-			"you're impressed by your own power",
-			"in this room, you're the boss"
-		],
-		[
-			"while he's sitting there",
-			"let's repeat some affirmations",
-			"to send positive vibes his way",
-			"after all, we're all about growth here",
-			"I am in control",
-			"my baby daddy is learning",
-			"his drama doesn't affect me",
-			"our communication improves",
-			"we both grow and evolve"
-		],
-		[
-			"it's time to say goodbye",
-			"to your baby daddy for now",
-			"you take a step back",
-			"and gently close the door",
-			"your room is filled with peace again",
-			"and he's left to ponder",
-			"what just happened"
+	}, {
+		"name": "door_one",
+		"clauses": [
+			[
+				"bring your focus back to the door",
+				"reach your hand out and turn the knob",
+				"give the door a light push and let it swing open on its own",
+				"oh look, it's your baby daddy on the other side",
+				"it seems like he's upset about something",
+				"he's moving his mouth but no sound is coming out",
+				"he seems to be aware that he can't speak",
+				"it's cute that he keeps trying"
+			],
+			[
+				"you realize that you're in total control here",
+				"this is your room and he can't make any sound",
+				"you tell him that unless he can calm down he won't be able to talk",
+				"this makes him more mad",
+				"his face is starting to get red",
+				"isn't it adorable that he thinks this will get him what he wants",
+				"in this room, you're the only one that gets what they want",
+				"you decide you want him to start being a good boy and calm down"
+			],
+			[
+				"you snap your fingers",
+				"and just like that",
+				"he stops his tantrum",
+				"he's sitting down now",
+				"looking confused but obedient",
+				"you're impressed by your own power",
+				"in this room, you're the boss"
+			],
+			[
+				"while he's sitting there",
+				"let's repeat some affirmations",
+				"to send positive vibes his way",
+				"after all, we're all about growth here",
+				"I am in control",
+				"my baby daddy is learning",
+				"his drama doesn't affect me",
+				"our communication improves",
+				"we both grow and evolve"
+			],
+			[
+				"it's time to say goodbye",
+				"to your baby daddy for now",
+				"you take a step back",
+				"and gently close the door",
+				"your room is filled with peace again",
+				"and he's left to ponder",
+				"what just happened"
+			]
 		]
-	]
-}, {
-	"name": "door_two",
-	"clauses": [
-		[
-			"bring your focus to another door",
-			"on the left side of the room",
-			"curiosity piqued, you approach",
-			"and reach out for the doorknob",
-			"as the door opens, you see",
-			"your baby daddy and his friends",
-			"hanging out, causing a ruckus"
-		],
-		[
-			"you wave your hand",
-			"and suddenly, they quiet down",
-			"they start to clean up their mess",
-			"and have a more wholesome time",
-			"you're impressed with your influence",
-			"in this room, only good vibes are allowed"
-		],
-		[
-			"let's reinforce the positivity",
-			"with affirmations for the group",
-			"feel the energy as you say them aloud",
-			"our circle is supportive",
-			"we uplift each other",
-			"negativity has no place here",
-			"we communicate openly and honestly",
-			"together, we grow stronger"
-		],
-		[
-			"it's time to part ways for now",
-			"you close the door gently",
-			"and return to the peaceful room",
-			"letting go of any lingering stress"
+	}, {
+		"name": "door_two",
+		"clauses": [
+			[
+				"bring your focus to another door",
+				"on the left side of the room",
+				"curiosity piqued, you approach",
+				"and reach out for the doorknob",
+				"as the door opens, you see",
+				"your baby daddy and his friends",
+				"hanging out, causing a ruckus"
+			],
+			[
+				"you wave your hand",
+				"and suddenly, they quiet down",
+				"they start to clean up their mess",
+				"and have a more wholesome time",
+				"you're impressed with your influence",
+				"in this room, only good vibes are allowed"
+			],
+			[
+				"let's reinforce the positivity",
+				"with affirmations for the group",
+				"feel the energy as you say them aloud",
+				"our circle is supportive",
+				"we uplift each other",
+				"negativity has no place here",
+				"we communicate openly and honestly",
+				"together, we grow stronger"
+			],
+			[
+				"it's time to part ways for now",
+				"you close the door gently",
+				"and return to the peaceful room",
+				"letting go of any lingering stress"
+			]
 		]
-	]
-}, {
-	"name": "door_three",
-	"clauses": [
-		[
-			"now you notice a third door",
-			"in the back of the room",
-			"intrigued, you move towards it",
-			"slowly opening it to reveal",
-			"your baby daddy with a new partner",
-			"they seem happy together"
-		],
-		[
-			"instead of feeling jealous",
-			"you choose to embrace growth",
-			"you send them both love and light",
-			"knowing that everyone deserves happiness"
-		],
-		[
-			"let's send positive thoughts",
-			"to both of them with affirmations",
-			"feel the warmth as you say them aloud",
-			"I release my attachment",
-			"I wish them well on their journey",
-			"my happiness is independent of others",
-			"I attract positive relationships",
-			"my heart is open to love and healing"
-		],
-		[
-			"with a deep breath, you step back",
-			"and gently close the door",
-			"returning to the tranquil room",
-			"your heart now lighter than before"
+	}, {
+		"name": "door_three",
+		"clauses": [
+			[
+				"now you notice a third door",
+				"in the back of the room",
+				"intrigued, you move towards it",
+				"slowly opening it to reveal",
+				"your baby daddy with a new partner",
+				"they seem happy together"
+			],
+			[
+				"instead of feeling jealous",
+				"you choose to embrace growth",
+				"you send them both love and light",
+				"knowing that everyone deserves happiness"
+			],
+			[
+				"let's send positive thoughts",
+				"to both of them with affirmations",
+				"feel the warmth as you say them aloud",
+				"I release my attachment",
+				"I wish them well on their journey",
+				"my happiness is independent of others",
+				"I attract positive relationships",
+				"my heart is open to love and healing"
+			],
+			[
+				"with a deep breath, you step back",
+				"and gently close the door",
+				"returning to the tranquil room",
+				"your heart now lighter than before"
+			]
 		]
-	]
-}, {
-	"name": "ending",
-	"clauses": [
-		[
-			"bring your focus back to the room",
-			"the sun is setting even more now",
-			"the colors of the sky deepen",
-			"and the waves still gently reach the shore",
-			"take a deep breath in",
-			"and as you exhale, release any remaining tension"
-		],
-		[
-			"now that you've meditated away the drama",
-			"you can open your eyes",
-			"and return to your daily life",
-			"feeling refreshed and empowered",
-			"thank you for joining me",
-			"Soothing Sister, on this journey",
-			"to a drama-free zone",
-			"may you carry this peace with you",
-			"everywhere you go"
+	}, {
+		"name": "ending",
+		"clauses": [
+			[
+				"bring your focus back to the room",
+				"the sun is setting even more now",
+				"the colors of the sky deepen",
+				"and the waves still gently reach the shore",
+				"take a deep breath in",
+				"and as you exhale, release any remaining tension"
+			],
+			[
+				"now that you've meditated away the drama",
+				"you can open your eyes",
+				"and return to your daily life",
+				"feeling refreshed and empowered",
+				"thank you for joining me",
+				"Soothing Sister, on this journey",
+				"to a drama-free zone",
+				"may you carry this peace with you",
+				"everywhere you go"
+			]
 		]
-	]
-}]
+	}]
+}

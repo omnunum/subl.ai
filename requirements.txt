@@ -10,3 +10,4 @@ opencv-python-headless
 webcolors
 scipy
 pedalboard
+dataclasses-json
