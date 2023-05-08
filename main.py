@@ -1,17 +1,16 @@
-import os
-import json
 from dataclasses import asdict
 import webbrowser
 from pathlib import Path
 
 from pydub import AudioSegment
-from jinja2 import Template
+from jinja2 import Environment, FileSystemLoader
 
 from common import find_files_in_directory
 from classes import Script, RenderedClause, RenderedSection
 from fetch_audio import fetch
 from process_audio import process_fragments, align_transcript
 
+jinja = Environment(loader=FileSystemLoader("."))
 
 def generate_report(rendered_sections: list[RenderedSection], output_dir: str):
     output_dir = Path(output_dir)
@@ -38,17 +37,25 @@ def generate_report(rendered_sections: list[RenderedSection], output_dir: str):
                     audio_files[audio_type] = audio_file.relative_to(output_dir)
 
                 fragment_table_row = (
-                    [f'<td>{fragment.text}</td>'] + 
-                    [f"""
-                        <td>
-                            <audio controls>
-                                <source src="{value}" type="audio/wav">
-                            </audio>
-                        </td>
-                    """
-                    for value in audio_files.values()] + 
                     [
-                        f"<td>{format(value, '.4f') if isinstance(value, float) else value}</td>" 
+                        f'<td>{fragment.text}</td>'
+                    ] +
+                    [
+                        f"""
+                            <td>
+                                <button onclick="playPause(this);" class="play-pause-btn">
+                                    <i class="fas fa-play"></i>
+                                </button>
+                                <audio id="audio-{section_idx}-{clause_idx}-{fragment_idx}-{audio_type}" onended="resetButton(this);">
+                                    <source src="{value}" type="audio/wav">
+                                </audio>
+                            </td>
+
+                        """
+                        for value in audio_files.values()
+                    ] +
+                    [
+                        f"<td>{format(value, '.4f') if isinstance(value, float) else value}</td>"
                         for key, value in asdict(fragment.report).items()
                     ]
                 )
@@ -56,13 +63,15 @@ def generate_report(rendered_sections: list[RenderedSection], output_dir: str):
                 table_rows.append('<tr>' + ''.join(fragment_table_row) + '</tr>')
 
             html_parts.append(f"""
-                <table border="1" cellpadding="5">
+                <table class="styled-table">
                     <tr>
                         <th>Text</th>
+
                         <th>Raw Audio</th>
                         <th>Nonsilent Audio</th>
                         <th>Processed Audio</th>
                         <th>Extended Audio</th>
+
                         <th>Speech Rate</th>
                         <th>Retime %</th>
                         <th>Noise Factor</th>
@@ -75,8 +84,10 @@ def generate_report(rendered_sections: list[RenderedSection], output_dir: str):
                     {"".join(table_rows)}
                 </table>
             """)
+    # Render HTML report using Jinja2
+    template = jinja.get_template("report_template.html")
+    html_content = template.render(html_content="\n".join(html_parts))
 
-    html_content = "\n".join(html_parts)
     report_file_path = output_dir / "report.html"
     with open(report_file_path, "w") as report_file:
         report_file.write(html_content)

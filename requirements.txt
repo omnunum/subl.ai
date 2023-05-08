@@ -11,3 +11,4 @@ webcolors
 scipy
 pedalboard
 dataclasses-json
+jinja2
