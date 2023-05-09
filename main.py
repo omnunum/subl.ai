@@ -1,14 +1,14 @@
-from dataclasses import asdict
 import webbrowser
+from dataclasses import asdict
 from pathlib import Path
 
-from pydub import AudioSegment
 from jinja2 import Environment, FileSystemLoader
+from pydub import AudioSegment
 
+from classes import RenderedClause, RenderedSection, Script
 from common import find_files_in_directory
-from classes import Script, RenderedClause, RenderedSection
 from fetch_audio import fetch
-from process_audio import process_fragments, align_transcript
+from process_audio import align_transcript, process_fragments
 
 jinja = Environment(loader=FileSystemLoader("."))
 

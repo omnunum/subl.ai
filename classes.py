@@ -1,6 +1,7 @@
-from pydub import AudioSegment
 from dataclasses import dataclass
+
 from dataclasses_json import dataclass_json
+from pydub import AudioSegment
 
 ScriptClause = list[str]
 @dataclass

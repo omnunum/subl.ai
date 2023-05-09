@@ -1,18 +1,18 @@
 import io
 import logging
-import subprocess
 import os
+import subprocess
 import tempfile
 
-from aeneas.executetask import ExecuteTask
-from aeneas.task import Task
-from aeneas.syncmap.fragment import SyncMapFragment
-from pydub import AudioSegment, silence
-import spacy
 import pyphen
+import spacy
+from aeneas.executetask import ExecuteTask
+from aeneas.syncmap.fragment import SyncMapFragment
+from aeneas.task import Task
+from pydub import AudioSegment, silence
 
+from classes import Fragment, RenderedAudio, RenderedAudioReport, ScriptClause
 from common import rescaled_noise
-from classes import RenderedAudio, RenderedAudioReport, Fragment, ScriptClause
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
