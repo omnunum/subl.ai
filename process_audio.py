@@ -48,7 +48,7 @@ def process_fragments(
     alignment: list[SyncMapFragment], 
     extend_silence_ms: int=500, 
     min_silence_ms: int=250, 
-    noise_scale: int=0.1, 
+    noise_scale: float=0.1, 
     target_speech_rate: float=3.0, 
     shift_fragment_windows: int=-50,
     target_dbfs: int=-20,
@@ -76,8 +76,8 @@ def process_fragments(
         #   window to avoid clicks at the end of each segment or cutting off the end
         #   of the segment.  If the previous ending fragment window was shifted, the
         #   beginning of the current fragment window will need to be shifted as well.
-        fragment_start = max(0, float(fragment.begin * 1000) + shift_fragment_windows)
-        fragment_end = float(fragment.end * 1000) + shift_fragment_windows
+        fragment_start = max(0, int(fragment.begin * 1000) + shift_fragment_windows)
+        fragment_end = int(fragment.end * 1000) + shift_fragment_windows
         raw_segment = input[fragment_start:fragment_end]
 
         # Translate the noise value to a range of 0.5 to 1.5 since the noise function

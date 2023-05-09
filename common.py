@@ -6,15 +6,15 @@ from typing import Optional
 import noise
 
 
-def list_directories(path: str) -> list[str]:
+def list_directories(path: str) -> list[Path]:
     dirs = []
     with os.scandir(path) as entries:
         for entry in entries:
             if entry.is_dir():
-                dirs.append(entry.path)
+                dirs.append(Path(entry.path))
     return dirs
 
-def find_files_in_directory(directory: str, regex: Optional[str]=None) -> list[str]:
+def find_files_in_directory(directory: str, regex: Optional[str]=None) -> list[Path]:
     found_files = []
     for root, _, files in os.walk(directory):
         for file in files:

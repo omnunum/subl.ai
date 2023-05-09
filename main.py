@@ -12,8 +12,7 @@ from process_audio import process_fragments, align_transcript
 
 jinja = Environment(loader=FileSystemLoader("."))
 
-def generate_report(rendered_sections: list[RenderedSection], output_dir: str):
-    output_dir = Path(output_dir)
+def generate_report(rendered_sections: list[RenderedSection], output_dir: Path):
     output_dir.mkdir(parents=True, exist_ok=True)
 
     segments_dir = output_dir / "segments"
