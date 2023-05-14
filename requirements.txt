@@ -12,4 +12,5 @@ scipy
 pedalboard
 dataclasses-json
 jinja2
-edgedb
+types-requests
+fastapi
