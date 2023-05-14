@@ -5,8 +5,8 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 from pydub import AudioSegment
 
-from app.schemas import RenderedClause, RenderedSection, Script
-from common import find_files_in_directory
+from backend.schemas import RenderedClause, RenderedSection, Script
+from backend.common import find_files_in_directory
 from fetch_audio import fetch
 from process_audio import align_transcript, process_fragments
 

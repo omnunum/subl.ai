@@ -6,7 +6,7 @@ import cv2
 import webcolors
 from scipy.interpolate import RectBivariateSpline
 
-from common import rescaled_noise
+from backend.common import rescaled_noise
 
 Color = list[int, int, int]
 WeightedColor = list[Color, float]

@@ -5,7 +5,7 @@ from typing import List, Tuple
 
 from pathlib import Path
 
-from classes import Script
+from backend.schemas import Script
 
 
 ProcessedClauses = List[Tuple[str, List[str]]]
