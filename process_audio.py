@@ -11,7 +11,7 @@ from aeneas.syncmap.fragment import SyncMapFragment
 from aeneas.task import Task
 from pydub import AudioSegment, silence
 
-from classes import Fragment, RenderedAudio, RenderedAudioReport, ScriptClause
+from app.schemas import Fragment, RenderedAudio, RenderedAudioReport, ScriptClause
 from common import rescaled_noise
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
