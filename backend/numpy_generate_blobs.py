@@ -2,16 +2,18 @@ from typing import Any
 
 import click
 import numpy as np
-import cv2
-import webcolors
-from scipy.interpolate import RectBivariateSpline
+import numpy.typing as npt
+import cv2 # type: ignore
+import webcolors # type: ignore
+from scipy.interpolate import RectBivariateSpline # type: ignore
 
 from backend.common import rescaled_noise
 
 Color = list[tuple[int, int, int]]
 WeightedColor = list[tuple[Color, float]]
 
-def process_colors(colors: str) -> tuple[np.NDArray, np.NDArray]:
+
+def process_colors(colors: str) -> tuple[npt.NDArray, npt.NDArray]:
     """
     Parses a string representation of colors and weights and returns
     arrays of colors and cumulative weights.
@@ -27,12 +29,12 @@ def process_colors(colors: str) -> tuple[np.NDArray, np.NDArray]:
     # Parse the input string and create a list of colors and weights
     parsed = [c.split(":") for c in colors.split(",")]
     # Separate the colors and weights into two separate lists
-    color_array, weights = zip(*parsed)
-    color_array = np.array([webcolors.hex_to_rgb(c) for c in color_array], dtype=np.float32)
-    weights = np.array(weights, dtype=np.float32)
+    color_list, weights = zip(*parsed)
+    color_array = np.array([webcolors.hex_to_rgb(c) for c in color_list], dtype=webcolors.IntegerRGB)
+    weights_array = np.array(weights, dtype=np.float32)
     
     # Compute the cumulative sum of weights, ensuring the sum is 1
-    cumulative_weights = np.cumsum(weights) / np.sum(weights)
+    cumulative_weights = np.cumsum(weights_array) / np.sum(weights_array)
     # Add a zero at the beginning of cumulative_weights
     cumulative_weights = np.hstack(([0], cumulative_weights))
     

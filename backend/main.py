@@ -3,12 +3,12 @@ from dataclasses import asdict
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
-from pydub import AudioSegment
+from pydub import AudioSegment # type: ignore
 
 from backend.schemas import Clause, Section, Script, Fragment
 from backend.common import find_files_in_directory
 from backend.fetch_audio import fetch
-from backend.process_audio import align_transcript, process_fragments
+from backend.process_audio import align_clause, process_fragments
 
 jinja = Environment(loader=FileSystemLoader("."))
 
@@ -115,7 +115,7 @@ def main():
                 name = f"{section_ix}_{section.name}_{clause_ix}.wav"
                 fragments = process_fragments(
                     AudioSegment.from_file(raw_dir / name), 
-                    align_transcript(raw_dir / name, clause), 
+                    align_clause(raw_dir / name, clause), 
                     extend_silence_ms=500, 
                     min_silence_ms=250, 
                     noise_scale=100, 

@@ -4,12 +4,12 @@ import os
 import subprocess
 import tempfile
 
-import pyphen
+import pyphen # type: ignore
 import spacy
-from aeneas.executetask import ExecuteTask
-from aeneas.syncmap.fragment import SyncMapFragment
-from aeneas.task import Task
-from pydub import AudioSegment, silence
+from aeneas.executetask import ExecuteTask # type: ignore
+from aeneas.syncmap.fragment import SyncMapFragment # type: ignore
+from aeneas.task import Task # type: ignore
+from pydub import AudioSegment, silence # type: ignore
 
 from backend.schemas import FragmentBase, ProcessedAudio, AudioReport, Clause
 from backend.common import rescaled_noise

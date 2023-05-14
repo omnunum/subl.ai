@@ -3,7 +3,7 @@ import re
 from pathlib import Path
 from typing import Optional
 
-import noise
+import noise # type: ignore
 
 
 def list_directories(path: str) -> list[Path]:
