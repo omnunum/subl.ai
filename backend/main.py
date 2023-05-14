@@ -5,14 +5,14 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 from pydub import AudioSegment
 
-from backend.schemas import RenderedClause, RenderedSection, Script
+from backend.schemas import Clause, Section, Script, Fragment
 from backend.common import find_files_in_directory
-from fetch_audio import fetch
-from process_audio import align_transcript, process_fragments
+from backend.fetch_audio import fetch
+from backend.process_audio import align_transcript, process_fragments
 
 jinja = Environment(loader=FileSystemLoader("."))
 
-def generate_report(rendered_sections: list[RenderedSection], output_dir: Path):
+def generate_report(rendered_sections: list[Section], output_dir: Path):
     output_dir.mkdir(parents=True, exist_ok=True)
 
     segments_dir = output_dir / "segments"
@@ -29,7 +29,7 @@ def generate_report(rendered_sections: list[RenderedSection], output_dir: Path):
 
             for fragment_idx, fragment in enumerate(clause.fragments):
                 audio_files = {}
-                fragment_audio = asdict(fragment.audio).items()
+                fragment_audio = fragment.processed_audio.__dict__.items()
                 for audio_type, audio in fragment_audio:
                     audio_file = segments_dir / f"{section_idx}_{clause_idx}_{fragment_idx}_{audio_type}.wav"
                     audio.export(audio_file, format="wav")
@@ -55,7 +55,7 @@ def generate_report(rendered_sections: list[RenderedSection], output_dir: Path):
                     ] +
                     [
                         f"<td>{format(value, '.4f') if isinstance(value, float) else value}</td>"
-                        for key, value in asdict(fragment.report).items()
+                        for key, value in fragment.report.__dict__.items()
                     ]
                 )
 
@@ -106,7 +106,7 @@ def main():
         output = AudioSegment.empty()
         report = []
         for section_ix, section in enumerate(script.sections):
-            rendered_section = RenderedSection(
+            rendered_section = Section(
                 name=section.name, 
                 audio=AudioSegment.empty(),
                 clauses=[]
@@ -123,7 +123,7 @@ def main():
                     shift_fragment_windows=-50
                 )
                 all_segments = sum([s.audio.extended for s in fragments])
-                rendered_clause = RenderedClause(
+                rendered_clause = Clause(
                     audio=all_segments,
                     fragments=fragments,
                 )  

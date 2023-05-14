@@ -16,7 +16,7 @@ def process_clauses(script: Script) -> ProcessedClauses:
         name = section.name
         formatted_clauses = []
         for clause in section.clauses:
-            formatted_clause = "\n".join([line + "..." for line in clause])
+            formatted_clause = "\n".join([f.text + "..." for f in clause.fragments])
             formatted_clauses.append(formatted_clause)
         result.append((name, formatted_clauses))
     return result

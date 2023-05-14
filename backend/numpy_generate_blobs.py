@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Any
 
 import click
 import numpy as np
@@ -8,10 +8,10 @@ from scipy.interpolate import RectBivariateSpline
 
 from backend.common import rescaled_noise
 
-Color = list[int, int, int]
-WeightedColor = list[Color, float]
+Color = list[tuple[int, int, int]]
+WeightedColor = list[tuple[Color, float]]
 
-def process_colors(colors: str) -> Tuple[np.ndarray, np.ndarray]:
+def process_colors(colors: str) -> tuple[np.NDArray, np.NDArray]:
     """
     Parses a string representation of colors and weights and returns
     arrays of colors and cumulative weights.

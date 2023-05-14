@@ -11,7 +11,7 @@ from aeneas.syncmap.fragment import SyncMapFragment
 from aeneas.task import Task
 from pydub import AudioSegment, silence
 
-from backend.schemas import Fragment, RenderedAudio, RenderedAudioReport, ScriptClause
+from backend.schemas import FragmentBase, ProcessedAudio, AudioReport, Clause
 from backend.common import rescaled_noise
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -23,7 +23,7 @@ nlp = spacy.load("en_core_web_sm")
 dic = pyphen.Pyphen(lang='en')
 
 
-def align_transcript(audio_filepath: str, transcript: ScriptClause):
+def align_clause(audio_filepath: str, clause: Clause):
     """Align a transcript to an audio file.
     
     :param audio_filepath: The path to the audio file.
@@ -32,7 +32,7 @@ def align_transcript(audio_filepath: str, transcript: ScriptClause):
     :return: The alignment.
     """
     with tempfile.NamedTemporaryFile(mode="w") as transcript_file:
-        transcript_file.write("\n".join(transcript))
+        transcript_file.write(clause.text)
         transcript_file.flush()
         # create Task object
         config_string = u"task_language=eng|is_text_type=plain|os_task_file_format=json"
@@ -52,7 +52,7 @@ def process_fragments(
     target_speech_rate: float=3.0, 
     shift_fragment_windows: int=-50,
     target_dbfs: int=-20,
-) -> list[Fragment]:
+) -> list[FragmentBase]:
     """Pad sections of silence in an audio file to be a certain length with additional
     length +/- the length as determined by the noise function.
     
@@ -121,14 +121,14 @@ def process_fragments(
         )
         extended_segment = processed_segment + AudioSegment.silent(duration=random_silence_duration)
 
-        fragments.append(Fragment(
-            audio=RenderedAudio(
+        fragments.append(FragmentBase(
+            processed_audio=ProcessedAudio(
                 raw=raw_segment,
                 nonsilent=nonsilent_segment,
                 processed=processed_segment,
                 extended=extended_segment
             ),
-            report=RenderedAudioReport(
+            report=AudioReport(
                 speech_rate=speech_rate,
                 retime_pct=retime_pct,
                 noise_factor=noise_factor,

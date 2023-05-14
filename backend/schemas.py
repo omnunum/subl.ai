@@ -40,6 +40,10 @@ class ClauseBase(BaseModel):
     audio: Optional[str]
     fragments: Optional[list[Fragment]]
 
+    @property
+    def text(self):
+        return "\n".join([f.text for f in self.fragments])
+
 class ClauseInsert(ClauseBase):
     fragments: list[Fragment]
 
