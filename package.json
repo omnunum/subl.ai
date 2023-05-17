@@ -1,0 +1,16 @@
+{
+    "name": "sublai",
+    "version": "0.0.0",
+    "description": "",
+    "scripts": {
+        "frontend:dev": "cd frontend && pnpm run dev",
+        "frontend:build": "cd frontend && pnpm run build",
+        "backend:dev": "cd backend && uvicorn main:app --reload",
+        "wundergraph:dev": "cd frontend && npx wundergraph develop",
+        "wundergraph:build": "cd frontend && npx wundergraph build"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "serverless": "github:serverless/serverless"
+    }
+}
