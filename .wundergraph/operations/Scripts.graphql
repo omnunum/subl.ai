@@ -1,0 +1,16 @@
+{
+	db_findManyscripts {
+		id
+		name
+		summary
+		sections {
+			id
+			name
+			sort_order
+			fragments {
+				sort_order
+				content
+			}
+		}
+	}
+}

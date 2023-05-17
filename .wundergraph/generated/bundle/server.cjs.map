@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../wundergraph.server.ts"],
+  "sourcesContent": ["import { GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql';\nimport { configureWunderGraphServer } from '@wundergraph/sdk/server';\n\nexport default configureWunderGraphServer(() => ({\n\thooks: {\n\t\tqueries: {},\n\t\tmutations: {},\n\t},\n\tgraphqlServers: [\n\t\t{\n\t\t\tserverName: 'gql',\n\t\t\tapiNamespace: 'gql',\n\t\t\tschema: new GraphQLSchema({\n\t\t\t\tquery: new GraphQLObjectType({\n\t\t\t\t\tname: 'RootQueryType',\n\t\t\t\t\tfields: {\n\t\t\t\t\t\thello: {\n\t\t\t\t\t\t\ttype: GraphQLString,\n\t\t\t\t\t\t\tresolve() {\n\t\t\t\t\t\t\t\treturn 'world';\n\t\t\t\t\t\t\t},\n\t\t\t\t\t\t},\n\t\t\t\t\t},\n\t\t\t\t}),\n\t\t\t}),\n\t\t},\n\t],\n}));\n"],
+  "mappings": ";;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA,qBAAgE;AAChE,oBAA2C;AAE3C,IAAO,iCAAQ,0CAA2B,OAAO;AAAA,EAChD,OAAO;AAAA,IACN,SAAS,CAAC;AAAA,IACV,WAAW,CAAC;AAAA,EACb;AAAA,EACA,gBAAgB;AAAA,IACf;AAAA,MACC,YAAY;AAAA,MACZ,cAAc;AAAA,MACd,QAAQ,IAAI,6BAAc;AAAA,QACzB,OAAO,IAAI,iCAAkB;AAAA,UAC5B,MAAM;AAAA,UACN,QAAQ;AAAA,YACP,OAAO;AAAA,cACN,MAAM;AAAA,cACN,UAAU;AACT,uBAAO;AAAA,cACR;AAAA,YACD;AAAA,UACD;AAAA,QACD,CAAC;AAAA,MACF,CAAC;AAAA,IACF;AAAA,EACD;AACD,EAAE;",
+  "names": []
+}
