@@ -4,7 +4,7 @@
     "version": "0.157.0"
   },
   "wunderctl": {
-    "version": "0.151.0"
+    "version": "0.152.1"
   },
   "node": {
     "version": "v20.1.0"
@@ -19,7 +19,7 @@
   "stats": {
     "totalApis": 1,
     "hasUploadProvider": false,
-    "totalOperations": 4,
+    "totalOperations": 1,
     "totalWebhooks": 0,
     "hasAuthenticationProvider": false
   }

@@ -21,39 +21,20 @@ import { Client } from "@wundergraph/sdk/client";
 import type { OperationErrors } from "./ts-operation-errors";
 
 import type { PublicCustomClaims } from "./claims";
-import type {
-	ScriptsResponse,
-	ScriptsResponseData,
-	UsersGetResponse,
-	UsersGetResponseData,
-	UsersSubscribeResponse,
-	UsersSubscribeResponseData,
-	UsersUpdateResponse,
-	UsersUpdateInput,
-	UsersUpdateResponseData,
-} from "./models";
+import type { ScriptsResponse, ScriptsResponseData } from "./models";
 export type UserRole = "admin" | "user";
 
 export const WUNDERGRAPH_S3_ENABLED = false;
 export const WUNDERGRAPH_AUTH_ENABLED = false;
 
 export const defaultClientConfig: ClientConfig = {
-	applicationHash: "6c5b5990",
+	applicationHash: "7c88fe6b",
 	baseURL: "http://localhost:9991",
 	sdkVersion: "0.157.0",
 };
 
 export const operationMetadata: OperationMetadata = {
 	Scripts: {
-		requiresAuthentication: false,
-	},
-	"users/get": {
-		requiresAuthentication: false,
-	},
-	"users/subscribe": {
-		requiresAuthentication: false,
-	},
-	"users/update": {
 		requiresAuthentication: false,
 	},
 };
@@ -111,40 +92,16 @@ export type Queries = {
 		requiresAuthentication: false;
 		liveQuery: boolean;
 	};
-	"users/get": {
-		input?: undefined;
-		response: { data?: UsersGetResponseData; error?: OperationErrors["users/get"] };
-		requiresAuthentication: false;
-		liveQuery: boolean;
-	};
 };
 
-export type Mutations = {
-	"users/update": {
-		input: UsersUpdateInput;
-		response: { data?: UsersUpdateResponseData; error?: OperationErrors["users/update"] };
-		requiresAuthentication: false;
-	};
-};
+export type Mutations = {};
 
-export type Subscriptions = {
-	"users/subscribe": {
-		input?: undefined;
-		response: { data?: UsersSubscribeResponseData; error?: OperationErrors["users/subscribe"] };
-		requiresAuthentication: false;
-	};
-};
+export type Subscriptions = {};
 
 export type LiveQueries = {
 	Scripts: {
 		input?: undefined;
 		response: { data?: ScriptsResponse["data"]; error?: ClientOperationErrors };
-		liveQuery: true;
-		requiresAuthentication: false;
-	};
-	"users/get": {
-		input?: undefined;
-		response: { data?: UsersGetResponse["data"]; error?: ClientOperationErrors };
 		liveQuery: true;
 		requiresAuthentication: false;
 	};

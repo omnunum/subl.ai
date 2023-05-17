@@ -7,24 +7,5 @@
       "content": "query Scripts {db_findManyscripts {id name summary sections {id name sort_order fragments {sort_order content}}}}"
     }
   ],
-  "typescript_operation_files": [
-    {
-      "operation_name": "UsersGet",
-      "api_mount_path": "users/get",
-      "file_path": "users/get.ts",
-      "module_path": "generated/bundle/operations/users/get"
-    },
-    {
-      "operation_name": "UsersSubscribe",
-      "api_mount_path": "users/subscribe",
-      "file_path": "users/subscribe.ts",
-      "module_path": "generated/bundle/operations/users/subscribe"
-    },
-    {
-      "operation_name": "UsersUpdate",
-      "api_mount_path": "users/update",
-      "file_path": "users/update.ts",
-      "module_path": "generated/bundle/operations/users/update"
-    }
-  ]
+  "typescript_operation_files": null
 }

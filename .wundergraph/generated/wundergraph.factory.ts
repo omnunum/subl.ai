@@ -3,6 +3,7 @@
 
 import type { InternalClient } from "./wundergraph.internal.client";
 import type { InternalOperationsClient } from "./wundergraph.internal.operations.client";
+import type { ORM } from './orm'
 import type { Role } from "./wundergraph.server";
 import type { CustomClaims } from "./claims";
 import { createOperationFactory } from "@wundergraph/sdk/operations";
@@ -15,4 +16,4 @@ export type ContextType = ContextField extends (...args: any) => any ? Awaited<R
 
 
 export {z, AuthorizationError} from "@wundergraph/sdk/operations";
-export const createOperation = createOperationFactory<InternalClient, Role, CustomClaims, InternalOperationsClient, ContextType>();
+export const createOperation = createOperationFactory<InternalClient, Role, CustomClaims, InternalOperationsClient, ORM, ContextType>();

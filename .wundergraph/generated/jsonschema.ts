@@ -8,18 +8,6 @@ interface Schema {
 		input: JSONSchema7;
 		response: JSONSchema7;
 	};
-	UsersGet: {
-		input: JSONSchema7;
-		response: JSONSchema7;
-	};
-	UsersSubscribe: {
-		input: JSONSchema7;
-		response: JSONSchema7;
-	};
-	UsersUpdate: {
-		input: JSONSchema7;
-		response: JSONSchema7;
-	};
 }
 
 const jsonSchema: Schema = {
@@ -73,24 +61,6 @@ const jsonSchema: Schema = {
 			},
 			additionalProperties: false,
 		},
-	},
-	UsersGet: {
-		input: { type: "object", properties: {} },
-		response: { type: "object", properties: { data: {} } },
-	},
-	UsersSubscribe: {
-		input: { type: "object", properties: {} },
-		response: { type: "object", properties: { data: {} } },
-	},
-	UsersUpdate: {
-		input: {
-			type: "object",
-			properties: { id: { type: "string" }, name: { type: "string" }, bio: { type: "string" } },
-			required: ["id", "name", "bio"],
-			additionalProperties: false,
-			$schema: "http://json-schema.org/draft-07/schema#",
-		},
-		response: { type: "object", properties: { data: {} } },
 	},
 };
 export default jsonSchema;
