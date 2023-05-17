@@ -1,11 +1,13 @@
 {
-  "name": "vite-template-solid",
+  "name": "sublai-frontend",
   "version": "0.0.0",
   "description": "",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "wunder:start": "wunderctl up --debug",
+    "wunder:build": "wunderctl generate"
   },
   "license": "MIT",
   "devDependencies": {
@@ -17,6 +19,9 @@
     "vite-plugin-solid": "^2.5.0"
   },
   "dependencies": {
+    "@wundergraph/sdk": "^0.157.0",
+    "graphql": "^16.6.0",
+    "relay-compiler": "^15.0.0",
     "solid-js": "^1.6.10"
   }
 }
