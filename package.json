@@ -10,6 +10,10 @@
         "wundergraph:build": "cd frontend && npx wundergraph build"
     },
     "license": "MIT",
+    "dependencies": {
+        "@wundergraph/sdk": "^0.157.0",
+        "graphql": "^16.6.0"
+    },
     "devDependencies": {
         "serverless": "github:serverless/serverless"
     }
