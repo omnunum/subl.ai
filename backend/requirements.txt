@@ -1,3 +1,4 @@
+aiofiles
 pydub
 click
 noise
@@ -14,3 +15,4 @@ dataclasses-json
 jinja2
 types-requests
 fastapi
+python-dotenv

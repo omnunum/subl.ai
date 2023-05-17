@@ -4,6 +4,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
 from pydub import AudioSegment # type: ignore
+from dotenv import load_dotenv # type: ignore
 
 from backend.schemas import Clause, Section, Script, Fragment
 from backend.common import find_files_in_directory
@@ -95,9 +96,12 @@ def generate_report(rendered_sections: list[Section], output_dir: Path):
     webbrowser.open(str(report_file_path))
 
 def main():
+    load_dotenv("../.env")
+
     for script_file in find_files_in_directory("scripts", "\.json"):
         with open(script_file, "r") as script_file:
             script = Script.from_json(script_file.read())
+        
 
         audio_dir = Path("audio", script.name)
         raw_dir = audio_dir / "raw"

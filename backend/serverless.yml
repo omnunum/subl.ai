@@ -1,0 +1,12 @@
+service: serverless
+
+frameworkVersion: '3'
+useDotenv: true
+provider:
+  name: aws
+  region: us-east-2
+  runtime: python3.10
+
+functions:
+  hello:
+    handler: handler.hello
